@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_piggy/src/models/chart_model.dart';
-import 'package:smart_piggy/util/color_resources.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TrackerWidget extends StatelessWidget {
@@ -83,7 +82,9 @@ class TrackerWidget extends StatelessWidget {
               width: 5,
               height: 15,
               decoration: BoxDecoration(
-                  color: color, borderRadius: BorderRadius.circular(2)),
+                color: color,
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
             const SizedBox(
               width: 8,
@@ -98,8 +99,9 @@ class TrackerWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: Text(
-            '\$$value',
-            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 30),
+            '\$${value.toStringAsFixed(2)}',
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 26),
           ),
         ),
       ],

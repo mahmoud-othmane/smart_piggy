@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:smart_piggy/src/models/PiggyModel.dart';
+
+import '../models/piggy_model.dart';
 
 mixin DialogHelper {
   Future<bool> showConfirmationDialog({
     required BuildContext context,
-    required Piggymodel model,
+    required PiggyModel model,
   }) async {
     final result = await showDialog<bool?>(
       context: context,
@@ -17,17 +18,27 @@ mixin DialogHelper {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${model.sign}${model.amount.toStringAsFixed(2)}\$',
-                  // Format value as a currency or decimal as needed
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                    width: 8), // Adjust spacing between value and item
-                Text(
-                  model.item,
-                  style: const TextStyle(fontSize: 20),
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      text:
+                          "${model.sign}${model.amount.toStringAsFixed(2)}\$  ",
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: model.item,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
