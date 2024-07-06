@@ -4,12 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class AiAPI {
-  final String _apiKey = "YOUR API KEY";
-  final String _url = "YOUR GROQ URL";
+  final String _apiKey = "YOUR-KEY";
+  final String _whisperUrl = "YOUR WHISPER URL";
+  final String _grocChatUrl = "YOUR GROC CHAT URL";
 
-  Future<String> transcribeAudio(File file) async {
+  Future<Map> transcribeAudio(File file) async {
     var fileName = file.path.split('/').last;
-    var request = http.MultipartRequest('POST', Uri.parse(_url));
+    var request = http.MultipartRequest('POST', Uri.parse(_whisperUrl));
 
     var multipartFile = await http.MultipartFile.fromPath('file', file.path,
         contentType: MediaType('audio', 'm4a'), // is it always m4a ???
@@ -27,9 +28,59 @@ class AiAPI {
     if (response.statusCode == 200) {
       var responseBody = await response.stream.bytesToString();
       var jsonResponse = json.decode(responseBody);
-      return jsonResponse['text'];
+      var record = await _tokenizeTextResults(jsonResponse['text']); // The cake
+      return record;
     } else {
       throw Exception('Failed to transcribe audio');
+    }
+  }
+
+  Future<Map> _tokenizeTextResults(String transcribedText) async {
+    var requestBody = {
+      'messages': [
+        {
+          'role': 'system',
+          'content': """
+Write a JSON object representing a user sentence about budget tracking. The JSON object should include keys for "item", "amount" (numerical value), and "sign" (+ for income, - for expense).
+
+*Example:* 
+The user says: "I spent 20 dollars on groceries."
+
+*Output:* {"item": "Groceries", "amount": 20, "sign": "-"}
+
+*Note:* Please respond only with a JSON object based on a user's sentence.
+""",
+        },
+        {
+          'role': 'user',
+          'content': transcribedText,
+        },
+      ],
+      'model': 'llama3-8b-8192',
+      'temperature': 0.5,
+      'max_tokens': 1024,
+      'top_p': 1,
+      'stop': null,
+      'stream': false,
+    };
+
+    var requestBodyJson = json.encode(requestBody);
+
+    var response = await http.post(
+      Uri.parse(_grocChatUrl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $_apiKey',
+      },
+      body: requestBodyJson,
+    );
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      var content = jsonResponse['choices'][0]['message']['content'];
+      return json.decode(content);
+    } else {
+      throw Exception('Failed to get completion');
     }
   }
 }

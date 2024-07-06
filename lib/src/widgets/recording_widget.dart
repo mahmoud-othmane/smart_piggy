@@ -5,17 +5,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
-// floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-// floatingActionButton: FloatingActionButton(
-// onPressed: _incrementCounter,
-// tooltip: 'Increment',
-// child: RecordingWidget(
-// onRecordDone: (record) {
-// print("The record we have is: ${record.path}");
-// },
-// ),
-// )
-
 class RecordingWidget extends StatefulWidget {
   final ValueChanged<File> onRecordDone;
 
