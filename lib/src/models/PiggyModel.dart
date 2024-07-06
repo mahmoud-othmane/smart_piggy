@@ -23,4 +23,7 @@ class Piggymodel {
 
   static List<Piggymodel> fromJsonList(List json) =>
       json.map((model) => Piggymodel.fromJson(model)).toList();
+
+  static List<Map<String, dynamic>> toJsonList(List<Piggymodel> list) =>
+      list.map((piggy) => piggy.toJson()).toList();
 }

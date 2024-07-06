@@ -16,8 +16,8 @@ class HomeProvider extends ChangeNotifier {
   Future<void> _saveToLocal(Piggymodel piggy) async {
     List<Piggymodel> tempPiggies = await _getAllDataString();
     tempPiggies.add(piggy);
-    final jsons = tempPiggies.map((piggy) => piggy.toJson()).toList();
-    String? piggiesJsonString = json.encode(jsons);
+    final jsonList = Piggymodel.toJsonList(tempPiggies);
+    String? piggiesJsonString = json.encode(jsonList);
     await storage.write(key: 'piggies', value: piggiesJsonString);
   }
 
