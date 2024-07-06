@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_piggy/src/providers/home_provider.dart';
 import 'package:smart_piggy/src/screens/home_screen.dart';
+import 'di_container.dart' as di;
 
 import 'util/color_resources.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Color(0xFF0075b0),
     ),
   );
-  runApp(const MyApp());
+  await di.init();
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => di.sl<HomeProvider>()),
+    ],
+  ));
 }
 
 class MyApp extends StatelessWidget {
