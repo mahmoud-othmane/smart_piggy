@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_piggy/src/providers/home_provider.dart';
 import 'package:smart_piggy/src/screens/home_screen.dart';
-import 'di_container.dart' as di;
 
+import 'di_container.dart' as di;
 import 'util/color_resources.dart';
 
 Future<void> main() async {
@@ -16,11 +16,16 @@ Future<void> main() async {
   );
   await di.init();
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => di.sl<HomeProvider>()),
-    ],
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => di.sl<HomeProvider>(),
+        ),
+      ],
+      child: MyApp(), // Make sure to add your main app widget here
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

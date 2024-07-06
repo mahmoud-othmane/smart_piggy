@@ -43,6 +43,7 @@ dependencies:
   syncfusion_flutter_charts: ^26.1.40
   get_it: ^7.7.0
   provider: ^6.1.2
+  flutter_secure_storage: ^9.2.2
 
 dev_dependencies:
   flutter_test:
