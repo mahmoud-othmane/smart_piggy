@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_piggy/src/screens/home_screen.dart';
+import 'package:smart_piggy/src/widgets/tracker_widget.dart';
 
 import 'util/color_resources.dart';
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           // canvasColor: ColorResources.getFlameColor(),
           bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: ColorResources.getPrimaryColor())),
-      home: const HomeScreen(title: 'Flutter Demo Home Page'),
+      home: TrackerWidget(),
     );
   }
 }
