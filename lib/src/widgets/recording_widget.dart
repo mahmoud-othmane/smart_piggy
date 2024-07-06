@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
+import 'package:smart_piggy/util/color_resources.dart';
 
 class RecordingWidget extends StatefulWidget {
   final ValueChanged<File> onRecordDone;
@@ -85,19 +86,25 @@ class _RecordingWidgetState extends State<RecordingWidget> {
       child: _recording
           ? GestureDetector(
               onTap: _stopRecording,
-              child: const RippleAnimation(
+              child: RippleAnimation(
                 color: Colors.green,
-                delay: Duration(milliseconds: 300),
+                delay: const Duration(milliseconds: 300),
                 repeat: true,
                 minRadius: 45,
                 ripplesCount: 6,
-                duration: Duration(milliseconds: 6 * 300),
-                child: Icon(Icons.mic),
+                duration: const Duration(milliseconds: 6 * 300),
+                child: Icon(
+                  Icons.mic,
+                  color: ColorResources.getWhiteColor(),
+                ),
               ),
             )
           : GestureDetector(
               onTap: _startRecording,
-              child: const Icon(Icons.mic),
+              child: Icon(
+                Icons.mic,
+                color: ColorResources.getWhiteColor(),
+              ),
             ),
     );
   }

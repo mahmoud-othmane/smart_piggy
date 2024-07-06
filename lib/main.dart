@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           // canvasColor: ColorResources.getFlameColor(),
           bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: ColorResources.getPrimaryColor())),
-      home: HomeScreen(title: 'Home Screen'),
+      home: const HomeScreen(title: 'Home Screen'),
     );
   }
 }

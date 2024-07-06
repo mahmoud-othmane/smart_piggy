@@ -5,41 +5,30 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TrackerWidget extends StatelessWidget {
   const TrackerWidget({super.key, required this.data});
+
   final List<ChartData> data;
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
     final double height = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: height * 0.2,
-            ),
-            Container(
-              margin: EdgeInsets.all(16),
-              padding: EdgeInsets.all(16 * 2),
-              decoration: BoxDecoration(
-                color: Color(0xffF8F8FA),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              width: width,
-              height: height * 0.25,
-              child: //Money type section
-                  Row(
-                children: [
-                  Expanded(
-                    child: _buildTrackerLeftSide(),
-                  ),
-                  Expanded(child: _buildTrackerRightSide(data)),
-                ],
-              ),
-            ),
-          ],
-        ),
+    return Container(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16 * 2),
+      decoration: BoxDecoration(
+        color: const Color(0xffF8F8FA),
+        borderRadius: BorderRadius.circular(25),
+      ),
+      width: width,
+      height: height * 0.25,
+      child: //Money type section
+          Row(
+        children: [
+          Expanded(
+            child: _buildTrackerLeftSide(),
+          ),
+          Expanded(child: _buildTrackerRightSide(data)),
+        ],
       ),
     );
   }
@@ -65,16 +54,25 @@ class TrackerWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _moneySection(color: ColorResources.getAsparagusColor()),
-        _moneySection(color: ColorResources.getFlameColor(), label: 'Spent'),
+        _moneySection(
+          color: data[0].color,
+          label: data[0].type,
+          value: data[0].total,
+        ),
+        _moneySection(
+          color: data[1].color,
+          label: data[1].type,
+          value: data[1].total,
+        ),
       ],
     );
   }
 
-  Column _moneySection(
-      {Color color = Colors.green,
-      String label = 'Income',
-      String value = '0000'}) {
+  Column _moneySection({
+    Color color = Colors.green,
+    String label = 'Income',
+    double value = 0.0,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
