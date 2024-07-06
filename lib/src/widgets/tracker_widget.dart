@@ -82,7 +82,9 @@ class TrackerWidget extends StatelessWidget {
               width: 5,
               height: 15,
               decoration: BoxDecoration(
-                  color: color, borderRadius: BorderRadius.circular(2)),
+                color: color,
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
             const SizedBox(
               width: 8,
@@ -90,7 +92,6 @@ class TrackerWidget extends StatelessWidget {
             Text(
               label,
               style: const TextStyle(color: Colors.grey),
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -98,9 +99,9 @@ class TrackerWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: Text(
-            '\$$value',
+            '\$${value.toStringAsFixed(2)}',
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 30),
+            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 26),
           ),
         ),
       ],

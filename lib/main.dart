@@ -23,7 +23,7 @@ Future<void> main() async {
           create: (context) => di.sl<HomeProvider>(),
         ),
       ],
-      child: MyApp(), // Make sure to add your main app widget here
+      child: const MyApp(), // Make sure to add your main app widget here
     ),
   );
 }

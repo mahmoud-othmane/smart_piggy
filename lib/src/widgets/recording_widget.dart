@@ -94,7 +94,7 @@ class _RecordingWidgetState extends State<RecordingWidget> {
                 ripplesCount: 6,
                 duration: const Duration(milliseconds: 6 * 300),
                 child: Icon(
-                  Icons.mic,
+                  Icons.pause,
                   color: ColorResources.getWhiteColor(),
                 ),
               ),
