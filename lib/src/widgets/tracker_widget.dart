@@ -4,16 +4,13 @@ import 'package:smart_piggy/util/color_resources.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TrackerWidget extends StatelessWidget {
-  const TrackerWidget({super.key});
+  const TrackerWidget({super.key, required this.data});
+  final List<ChartData> data;
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
     final double height = MediaQuery.sizeOf(context).height;
-    final data = [
-      ChartData('spent', 3631, ColorResources.getFlameColor()),
-      ChartData('income', 8490, ColorResources.getAsparagusColor()),
-    ];
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

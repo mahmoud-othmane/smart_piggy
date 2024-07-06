@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_piggy/src/models/chart_model.dart';
 import 'package:smart_piggy/src/widgets/tracker_widget.dart';
 
 import 'util/color_resources.dart';
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
           // canvasColor: ColorResources.getFlameColor(),
           bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: ColorResources.getPrimaryColor())),
-      home: TrackerWidget(),
+      home: TrackerWidget(data: [
+        ChartData('spent', 3631, ColorResources.getFlameColor()),
+        ChartData('income', 8490, ColorResources.getAsparagusColor()),
+      ]),
     );
   }
 }
