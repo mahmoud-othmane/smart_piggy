@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:smart_piggy/src/models/PiggyModel.dart';
 
 class AiAPI {
   // final String _apiKey = "YOUR-KEY";
@@ -15,7 +16,7 @@ class AiAPI {
       "https://api.groq.com/openai/v1/audio/transcriptions";
   final String _groqChatUrl = "https://api.groq.com/openai/v1/chat/completions";
 
-  Future<Map> transcribeAudio(File file) async {
+  Future<Piggymodel> transcribeAudio(File file) async {
     var fileName = file.path.split('/').last;
     var request = http.MultipartRequest('POST', Uri.parse(_whisperUrl));
 
@@ -36,7 +37,7 @@ class AiAPI {
       var responseBody = await response.stream.bytesToString();
       var jsonResponse = json.decode(responseBody);
       var record = await _tokenizeTextResults(jsonResponse['text']); // The cake
-      return record;
+      return Piggymodel.fromJson(record);
     } else {
       throw Exception('Failed to transcribe audio');
     }
