@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_piggy/src/models/chart_model.dart';
-import 'package:smart_piggy/src/services/ai_api.dart';
 import 'package:smart_piggy/src/widgets/list_view.dart';
 import 'package:smart_piggy/src/widgets/tracker_widget.dart';
 import 'package:smart_piggy/util/color_resources.dart';
@@ -54,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: ColorResources.getAsparagusColor(),
+        backgroundColor: ColorResources.getLightColor(),
         onPressed: () {},
         child: RecordingWidget(
           onRecordDone: (record) {},

@@ -1,12 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class AiAPI {
-  final String _apiKey = "YOUR-KEY";
-  final String _whisperUrl = "YOUR WHISPER URL";
-  final String _grocChatUrl = "YOUR GROC CHAT URL";
+  // final String _apiKey = "YOUR-KEY";
+  // final String _whisperUrl = "YOUR WHISPER URL";
+  // final String _grocChatUrl = "YOUR GROC CHAT URL";
+
+  final String _apiKey =
+      "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";
+  final String _whisperUrl =
+      "https://api.groq.com/openai/v1/audio/transcriptions";
+  final String _groqChatUrl = "https://api.groq.com/openai/v1/chat/completions";
 
   Future<Map> transcribeAudio(File file) async {
     var fileName = file.path.split('/').last;
@@ -67,7 +74,7 @@ The user says: "I spent 20 dollars on groceries."
     var requestBodyJson = json.encode(requestBody);
 
     var response = await http.post(
-      Uri.parse(_grocChatUrl),
+      Uri.parse(_groqChatUrl),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $_apiKey',
