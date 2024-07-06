@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_piggy/src/modules/chart_model.dart';
+import 'package:smart_piggy/src/models/chart_model.dart';
 import 'package:smart_piggy/util/color_resources.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -54,8 +54,8 @@ class TrackerWidget extends StatelessWidget {
         DoughnutSeries<ChartData, String>(
           explodeIndex: 0,
           dataSource: data,
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y,
+          xValueMapper: (ChartData data, _) => data.type,
+          yValueMapper: (ChartData data, _) => data.total,
           pointColorMapper: (ChartData data, _) => data.color,
           name: 'Tracker',
           radius: '100%',

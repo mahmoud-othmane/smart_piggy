@@ -40,6 +40,7 @@ dependencies:
   simple_ripple_animation: ^0.0.9
   http: ^1.2.1
   http_parser: ^4.0.2
+  syncfusion_flutter_charts: ^26.1.40
 
 dev_dependencies:
   flutter_test:
