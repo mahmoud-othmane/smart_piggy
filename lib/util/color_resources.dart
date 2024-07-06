@@ -45,6 +45,10 @@ class ColorResources {
     return const Color(0xFF679959);
   }
 
+  static Color getLightColor() {
+    return const Color(0xFF679959);
+  }
+
   static Color getRawUmberColor() {
     return const Color(0xFFA16C48);
   }

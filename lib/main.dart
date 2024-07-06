@@ -38,11 +38,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Smart Piggy',
       theme: ThemeData(
-          fontFamily: 'Rubik',
-          primaryColor: ColorResources.getPrimaryColor(),
-          // canvasColor: ColorResources.getFlameColor(),
-          bottomSheetTheme: BottomSheetThemeData(
-              backgroundColor: ColorResources.getPrimaryColor())),
+        fontFamily: 'Rubik',
+        primaryColor: ColorResources.getPrimaryColor(),
+        // canvasColor: ColorResources.getFlameColor(),
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: ColorResources.getPrimaryColor(),
+        ),
+      ),
       home: const HomeScreen(title: 'Home Screen'),
     );
   }
