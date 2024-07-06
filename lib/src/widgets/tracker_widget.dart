@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_piggy/src/modules/chart_model.dart';
+import 'package:smart_piggy/util/color_resources.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TrackerWidget extends StatelessWidget {
@@ -9,8 +11,8 @@ class TrackerWidget extends StatelessWidget {
     final double width = MediaQuery.sizeOf(context).width;
     final double height = MediaQuery.sizeOf(context).height;
     final data = [
-      _ChartData('spent', 3631, Colors.red),
-      _ChartData('income', 8490, Colors.green),
+      ChartData('spent', 3631, ColorResources.getFlameColor()),
+      ChartData('income', 8490, ColorResources.getAsparagusColor()),
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -33,35 +35,42 @@ class TrackerWidget extends StatelessWidget {
                   Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _moneySection(),
-                        _moneySection(color: Colors.red, label: 'Spent'),
-                      ],
-                    ),
+                    child: _buildTrackerLeftSide(),
                   ),
-                  Expanded(
-                      child: SfCircularChart(
-                    margin: EdgeInsets.zero,
-                    series: [
-                      DoughnutSeries<_ChartData, String>(
-                        explodeIndex: 0,
-                        dataSource: data,
-                        xValueMapper: (_ChartData data, _) => data.x,
-                        yValueMapper: (_ChartData data, _) => data.y,
-                        pointColorMapper: (_ChartData data, _) => data.color,
-                        name: 'Tracker',
-                        radius: '100%',
-                      )
-                    ],
-                  )),
+                  Expanded(child: _buildTrackerRightSide(data)),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  SfCircularChart _buildTrackerRightSide(List<ChartData> data) {
+    return SfCircularChart(
+      margin: EdgeInsets.zero,
+      series: [
+        DoughnutSeries<ChartData, String>(
+          explodeIndex: 0,
+          dataSource: data,
+          xValueMapper: (ChartData data, _) => data.x,
+          yValueMapper: (ChartData data, _) => data.y,
+          pointColorMapper: (ChartData data, _) => data.color,
+          name: 'Tracker',
+          radius: '100%',
+        )
+      ],
+    );
+  }
+
+  Column _buildTrackerLeftSide() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _moneySection(color: ColorResources.getAsparagusColor()),
+        _moneySection(color: ColorResources.getFlameColor(), label: 'Spent'),
+      ],
     );
   }
 
@@ -95,18 +104,10 @@ class TrackerWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16.0),
           child: Text(
             '\$$value',
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 30),
+            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 30),
           ),
         ),
       ],
     );
   }
-}
-
-class _ChartData {
-  _ChartData(this.x, this.y, this.color);
-
-  final String x;
-  final double y;
-  final Color color;
 }
