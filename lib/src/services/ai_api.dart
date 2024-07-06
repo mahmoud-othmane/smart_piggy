@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:smart_piggy/src/models/PiggyModel.dart';
 
 class AiAPI {
   final String _apiKey = "YOUR-KEY";
   final String _whisperUrl = "YOUR WHISPER URL";
-  final String _grocChatUrl = "YOUR GROC CHAT URL";
+  final String _groqChatUrl = "YOUR GROC CHAT URL";
 
-  Future<Map> transcribeAudio(File file) async {
+  Future<Piggymodel> transcribeAudio(File file) async {
     var fileName = file.path.split('/').last;
     var request = http.MultipartRequest('POST', Uri.parse(_whisperUrl));
 
@@ -29,7 +30,7 @@ class AiAPI {
       var responseBody = await response.stream.bytesToString();
       var jsonResponse = json.decode(responseBody);
       var record = await _tokenizeTextResults(jsonResponse['text']); // The cake
-      return record;
+      return Piggymodel.fromJson(record);
     } else {
       throw Exception('Failed to transcribe audio');
     }
@@ -67,7 +68,7 @@ The user says: "I spent 20 dollars on groceries."
     var requestBodyJson = json.encode(requestBody);
 
     var response = await http.post(
-      Uri.parse(_grocChatUrl),
+      Uri.parse(_groqChatUrl),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $_apiKey',
