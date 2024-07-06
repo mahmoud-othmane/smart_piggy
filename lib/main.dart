@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           // canvasColor: ColorResources.getFlameColor(),
           bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: ColorResources.getPrimaryColor())),
-      home: const HomeScreen(title: 'Flutter Demo Home Page'),
+      home: HomeScreen(title: 'Home Screen'),
     );
   }
 }
